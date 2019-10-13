@@ -18,23 +18,8 @@ public class TankFrame extends Frame {
 		setResizable(false); 								//无法改变 窗户大小,玩游戏嘛，肯定不能变
 		setTitle("LHW Tank War");
 		
-		//this.addKeyListener(new MyKeyListener());			
+		this.addKeyListener(new MyKeyListener());			//不匿名试试，就单纯自己定义一个内部类
 		
-		this.addKeyListener(new KeyAdapter() { //this可以写可以不写
-			
-			@Override
-			public void keyPressed(KeyEvent e) {
-				super.keyPressed(e);
-				System.out.println("key pressed");
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				super.keyReleased(e);
-				System.out.println("key released");
-			}
-			
-		});
 		
 		//匿名类
 		addWindowListener(new WindowAdapter() {  			//WindowAdapter 实现了WindowListener接口
@@ -62,19 +47,21 @@ public class TankFrame extends Frame {
 		System.out.println("调用paint");
 		g.fillRect(x, y, 50, 50);						//用画笔绘制黑色方块
 		x += 50;
-		y += 50;
+		//y += 50;
 	}
 	
 	   
-//	class MyKeyListener() extends KeyAdapter {
-//		@Override
-//		public void keyPressed(KeyEvent e) {
-//			System.out.println("key pressed");
-//		}
-//		@Override
-//		public void keyReleased(KeyEvent e) {
-//			System.out.println("key released");
-//		}
-//		
-//	}
+	class MyKeyListener extends KeyAdapter {
+		
+		@Override
+		public void keyPressed(KeyEvent e) {
+			System.out.println("key pressed");
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			System.out.println("key released");
+		}
+	}
+	
 }
