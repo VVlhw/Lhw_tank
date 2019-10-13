@@ -10,9 +10,8 @@ import java.awt.event.WindowEvent;
 
 public class TankFrame extends Frame {
 	
-	int x = 200, y = 200;
-	Dir dir = Dir.DOWN;
-	private static final int SPEED = 10;					//static final 不能改变的真正常量
+	Tank myTank = new Tank(200, 200, Dir.DOWN);
+	
 	
 	public TankFrame() {
 		setSize(800, 600);
@@ -45,23 +44,9 @@ public class TankFrame extends Frame {
 
 	@Override
 	public void paint(Graphics g) {  						//接受 系统给的Graphics参数———画笔
-		g.fillRect(x, y, 50, 50);						//用画笔绘制黑色方块
-		//x += 10;
-		//y += 10;
-		switch(dir) {
-		case LEFT:
-			x -= SPEED;
-			break;
-		case UP:
-			y -= SPEED;
-			break;
-		case RIGHT:
-			x += SPEED;
-			break;
-		case DOWN:
-			y += SPEED;
-			break;
-		}
+		
+		myTank.paint(g); 
+		
 	}
 	
 	   
@@ -117,14 +102,15 @@ public class TankFrame extends Frame {
 				break;
 			}
 			
-			setMainTankDir();
+			//setMainTankDir();							//我觉得没必要，松开了就按原来的方向走，又不是要它停
 		}
 
 		private void setMainTankDir() {
-			if (L) dir = Dir.LEFT;
-			if (U) dir = Dir.UP;
-			if (R) dir = Dir.RIGHT;
-			if (D) dir = Dir.DOWN;
+													//可能两个键同时按 所以都是if 
+			if (L) myTank.setDir(Dir.LEFT);
+			if (U) myTank.setDir(Dir.UP);
+			if (R) myTank.setDir(Dir.RIGHT);
+			if (D) myTank.setDir(Dir.DOWN);
 			
 		}
 	}
