@@ -5,7 +5,7 @@ import java.awt.Graphics;
 public class Tank {
 	 private int x, y;
 	 private Dir dir = Dir.DOWN;
-	 private static final int SPEED = 10;					//static final 不能改变的真正常量
+	 private static final int SPEED = 5;					//static final 不能改变的真正常量
 	 
 	 private boolean moving = false;
 	 
