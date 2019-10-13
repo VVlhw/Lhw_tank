@@ -7,8 +7,17 @@ public class Tank {
 	 private Dir dir = Dir.DOWN;
 	 private static final int SPEED = 10;					//static final 不能改变的真正常量
 	 
+	 private boolean moving = false;
 	 
-	 public Dir getDir() {
+	public boolean isMoving() {
+		return moving;
+	}
+
+	public void setMoving(boolean moving) {
+		this.moving = moving;
+	}
+
+	public Dir getDir() {
 		 return dir;
 	 }
 
@@ -26,6 +35,14 @@ public class Tank {
 
 	public void paint(Graphics g) {
 		g.fillRect(x, y, 50, 50);						//用画笔绘制黑色方块
+		
+		move();
+		
+	}
+	
+	private void move() {
+		if (!moving) return;
+		
 		switch(dir) {
 		case LEFT:
 			x -= SPEED;
@@ -41,7 +58,6 @@ public class Tank {
 			break;
 		}
 	}
-	 
 	 
 	 
 }

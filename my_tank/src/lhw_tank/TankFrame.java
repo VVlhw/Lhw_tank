@@ -102,15 +102,20 @@ public class TankFrame extends Frame {
 				break;
 			}
 			
-			//setMainTankDir();							//我觉得没必要，松开了就按原来的方向走，又不是要它停
+			setMainTankDir();							//要考虑松开了，都没按就停
 		}
 
 		private void setMainTankDir() {
-													//可能两个键同时按 所以都是if 
-			if (L) myTank.setDir(Dir.LEFT);
-			if (U) myTank.setDir(Dir.UP);
-			if (R) myTank.setDir(Dir.RIGHT);
-			if (D) myTank.setDir(Dir.DOWN);
+			if (!L && !U && !R && !D)	myTank.setMoving(false);
+			else {
+				myTank.setMoving(true);
+				if (L) myTank.setDir(Dir.LEFT);				//可能两个键同时按 所以都是if 
+				if (U) myTank.setDir(Dir.UP);
+				if (R) myTank.setDir(Dir.RIGHT);
+				if (D) myTank.setDir(Dir.DOWN);
+			}
+			
+			
 			
 		}
 	}
