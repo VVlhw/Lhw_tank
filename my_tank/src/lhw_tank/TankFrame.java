@@ -52,15 +52,54 @@ public class TankFrame extends Frame {
 	
 	   
 	class MyKeyListener extends KeyAdapter {
+		boolean L = false; 
+		boolean R = false;
+		boolean U = false;
+		boolean D = false;
 		
 		@Override
 		public void keyPressed(KeyEvent e) {
-			System.out.println("key pressed");
+			//System.out.println("key pressed");
+			int key = e.getKeyCode();
+			switch (key) {
+			case KeyEvent.VK_LEFT:
+				L = true;
+				break;
+			case KeyEvent.VK_RIGHT:
+				R = true;
+				break;
+			case KeyEvent.VK_UP:
+				U = true;
+				break;
+			case KeyEvent.VK_DOWN:
+				D = true;
+				break;
+			default: 
+				break;
+			}
 		}
 
 		@Override
 		public void keyReleased(KeyEvent e) {
-			System.out.println("key released");
+			//System.out.println("key released");
+			int key = e.getKeyCode();					//从事件中获取按的是什么按键
+														//为什么要标记，因为机器进入 一定有先后，所以用标记，而不是直接加
+			switch (key) {
+			case KeyEvent.VK_LEFT:
+				L = false;
+				break;
+			case KeyEvent.VK_RIGHT:
+				R = false;
+				break;
+			case KeyEvent.VK_UP:
+				U = false;
+				break;
+			case KeyEvent.VK_DOWN:
+				D = false;
+				break;
+			default: 
+				break;
+			}
 		}
 	}
 	
