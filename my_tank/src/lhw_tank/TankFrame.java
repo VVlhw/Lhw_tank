@@ -2,6 +2,9 @@ package lhw_tank;
 
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -15,6 +18,8 @@ public class TankFrame extends Frame {
 		setResizable(false); 								//无法改变 窗户大小,玩游戏嘛，肯定不能变
 		setTitle("LHW Tank War");
 		
+		this.addKeyListener((KeyListener) new MyKeyListener());			//this可以写可以不写
+		
 		//匿名类
 		addWindowListener(new WindowAdapter() {  			//WindowAdapter 实现了WindowListener接口
 			@Override
@@ -22,9 +27,6 @@ public class TankFrame extends Frame {
 				System.exit(0);
 			}
 		});
-		
-		
-		
 		/*
 		 【JFrame与Frame的区别】
 		  1.JFrame是javax.swing.JFrame包中的类,Frame是java.awt.Frame包中的类
@@ -32,8 +34,12 @@ public class TankFrame extends Frame {
 		  	JFrame.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 		  	Frame要如上加监听事件
 		*/
+		
+		
 	}
 	
+	
+
 	@Override
 	public void paint(Graphics g) {  						//接受 系统给的Graphics参数———画笔
 	
@@ -41,5 +47,18 @@ public class TankFrame extends Frame {
 		g.fillRect(x, y, 50, 50);						//用画笔绘制黑色方块
 		x += 50;
 		y += 50;
+	}
+	
+	
+	class MyKeyListener() extends KeyAdapter {
+		
+		public void keyPressed(KeyEvent e) {
+			System.out.println("key pressed");
+		}
+		
+		public void keyReleased(KeyEvent e) {
+			System.out.println("key released");
+		}
+		
 	}
 }
