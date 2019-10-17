@@ -1,5 +1,6 @@
 package lhw_tank;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Tank {
@@ -12,19 +13,19 @@ public class Tank {
 	public boolean isMoving() {
 		return moving;
 	}
-
+	
 	public void setMoving(boolean moving) {
 		this.moving = moving;
 	}
-
+	
 	public Dir getDir() {
 		 return dir;
 	 }
-
+	
 	 public void setDir(Dir dir) {
 		 this.dir = dir;
 	 }
-
+	
 	 
 	 public Tank(int x, int y, Dir dir) {
 		super();
@@ -32,9 +33,13 @@ public class Tank {
 		this.y = y;
 		this.dir = dir;
 	 }
-
+	
 	public void paint(Graphics g) {
+		Color c = g.getColor();
+		g.setColor(Color.YELLOW);
 		g.fillRect(x, y, 50, 50);						//用画笔绘制黑色方块
+		g.setColor(c);
+		
 		
 		move();
 		

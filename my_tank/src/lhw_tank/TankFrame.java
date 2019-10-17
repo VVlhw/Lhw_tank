@@ -1,7 +1,9 @@
 package lhw_tank;
 
+import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -12,9 +14,10 @@ public class TankFrame extends Frame {
 	
 	Tank myTank = new Tank(200, 200, Dir.DOWN);
 	Bullet b = new Bullet(300, 300, Dir.DOWN);
+	static final int GAME_WIDTH = 800, GAME_HEIGHT = 600; 
 	
 	public TankFrame() {
-		setSize(800, 600);
+		setSize(GAME_WIDTH, GAME_HEIGHT);
 		setVisible(true);
 		setResizable(false); 								//无法改变 窗户大小,玩游戏嘛，肯定不能变
 		setTitle("LHW Tank War");
@@ -40,11 +43,24 @@ public class TankFrame extends Frame {
 		
 	}
 	
-	
+	//双缓冲
+	Image offScreenImage = null;
+	@Override
+	public void update(Graphics g) {
+		if(offScreenImage == null) {
+			offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
+		}
+		Graphics gOffScreen = offScreenImage.getGraphics();
+		Color c = gOffScreen.getColor();
+		gOffScreen.setColor(Color.BLACK);
+		gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+		gOffScreen.setColor(c);
+		paint(gOffScreen);
+		g.drawImage(offScreenImage, 0, 0, null);
+	}
 
 	@Override
 	public void paint(Graphics g) {  						//接受 系统给的Graphics参数———画笔
-		
 		myTank.paint(g); 
 		b.paint(g);
 	}
@@ -73,6 +89,8 @@ public class TankFrame extends Frame {
 			case KeyEvent.VK_DOWN:
 				D = true;
 				break;
+			case KeyEvent.VK_CONTROL:
+				//new bullet
 			default: 
 				break;
 			}
