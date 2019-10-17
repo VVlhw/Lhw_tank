@@ -7,8 +7,12 @@ public class Tank {
 	private int x, y;
 	private Dir dir = Dir.DOWN;
 	private static final int SPEED = 5;					//static final 不能改变的真正常量
-	 
+	
+	public static int WIDTH = ResourceMgr.tankD.getWidth();
+	public static int HEIGHT = ResourceMgr.tankD.getHeight();
+	
 	private boolean moving = false;
+	
 	private TankFrame tf = null;
 	 
 	public boolean isMoving() {
@@ -79,7 +83,9 @@ public class Tank {
 	}
 
 	public void fire() {
-		tf .bullets.add(new Bullet(this.x, this.y, this.dir, this.tf));
+		int bX = this.x + this.WIDTH / 2 - Bullet.WIDTH / 2;
+		int bY = this.y + this.HEIGHT / 2 - Bullet.HEIGHT / 2;
+		tf .bullets.add(new Bullet(bX, bY, this.dir, this.tf));
 	}
 	 
 	 

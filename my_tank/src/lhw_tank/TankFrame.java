@@ -133,6 +133,8 @@ public class TankFrame extends Frame {
 			case KeyEvent.VK_DOWN:
 				D = false;
 				break;
+			case KeyEvent.VK_CONTROL:
+				break;
 			default: 
 				break;
 			}

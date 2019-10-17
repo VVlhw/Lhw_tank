@@ -5,7 +5,8 @@ import java.awt.Graphics;
 
 public class Bullet {
 	private static final int SPEED = 10;
-	private static int WIDTH = 30, HEIGHT = 30;
+	public static int WIDTH = ResourceMgr.bulletD.getWidth();
+	public static int HEIGHT = ResourceMgr.bulletD.getHeight();
 	
 	private int x, y;
 	private Dir dir;
@@ -40,7 +41,7 @@ public class Bullet {
 			g.drawImage(ResourceMgr.bulletD, x, y, null);
 			break;
 		
-	}
+		}
 		
 		move();
 		

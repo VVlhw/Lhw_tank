@@ -9,6 +9,7 @@ public class ResourceMgr {
 	//一开始就应该先 加载所有图片 ResourceManager
 	public static BufferedImage tankL, tankU, tankR, tankD;
 	public static BufferedImage bulletL, bulletU, bulletR, bulletD;
+	
 	static {
 		try {
 			tankL = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankL.gif"));
