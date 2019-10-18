@@ -2,6 +2,7 @@ package lhw_tank;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.Random;
 
 public class Tank {
@@ -9,7 +10,7 @@ public class Tank {
 	private Dir dir = Dir.DOWN;
 	private static final int SPEED = 2;					//static final 不能改变的真正常量
 	
-	
+	Rectangle rect = new Rectangle();
 
 	public static int WIDTH = ResourceMgr.goodTankU.getWidth();
 	public static int HEIGHT = ResourceMgr.goodTankU.getHeight();
@@ -70,6 +71,11 @@ public class Tank {
 		this.dir = dir;
 		this.group = group;
 		this.tf = tf;
+		
+		rect.x = this.x;
+		rect.y = this.y;
+		rect.width = WIDTH;
+		rect.height = HEIGHT;
 	}
 	
 	public void paint(Graphics g) {
@@ -114,6 +120,8 @@ public class Tank {
 			break;
 		}
 		
+		
+		
 		if (this.group == Group.BAD && random.nextInt(100) > 95) 
 			this.fire();
 		
@@ -121,6 +129,10 @@ public class Tank {
 			randomDir();
 		
 		boundCheck();
+		
+		//update rect
+		rect.x = this.x;
+		rect.y = this.y;
 	}
 
 	private void boundCheck() {
