@@ -7,12 +7,12 @@ import java.util.Random;
 public class Tank {
 	private int x, y;
 	private Dir dir = Dir.DOWN;
-	private static final int SPEED = 5;					//static final 不能改变的真正常量
+	private static final int SPEED = 2;					//static final 不能改变的真正常量
 	
 	
 
-	public static int WIDTH = ResourceMgr.tankD.getWidth();
-	public static int HEIGHT = ResourceMgr.tankD.getHeight();
+	public static int WIDTH = ResourceMgr.tankU.getWidth();
+	public static int HEIGHT = ResourceMgr.tankU.getHeight();
 	
 	private boolean moving = true;
 	
@@ -114,7 +114,7 @@ public class Tank {
 			break;
 		}
 		
-		if (random.nextInt(10) > 8) this.fire();
+		if (this.group == Group.BAD && random.nextInt(10) > 8) this.fire();
 	}
 
 	public void fire() {
@@ -122,6 +122,8 @@ public class Tank {
 		int bY = this.y + HEIGHT / 2 - Bullet.HEIGHT / 2;
 		
 		tf .bullets.add(new Bullet(bX, bY, this.dir, this.group, this.tf));
+		
+		if(this.group == Group.GOOD) new Thread(()->new Audio("audio/tank_fire.wav").play()).start();
 	}
 
 	public void die() {
