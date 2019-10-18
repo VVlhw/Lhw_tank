@@ -114,7 +114,16 @@ public class Tank {
 			break;
 		}
 		
-		if (this.group == Group.BAD && random.nextInt(10) > 8) this.fire();
+		if (this.group == Group.BAD && random.nextInt(100) > 95) 
+			this.fire();
+		
+		if (this.group == Group.BAD && random.nextInt(100) > 95) 
+			randomDir();
+		
+	}
+
+	private void randomDir() {
+		this.dir = Dir.values()[random.nextInt(4)];
 	}
 
 	public void fire() {
