@@ -2,6 +2,7 @@ package lhw_tank;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Random;
 
 public class Tank {
 	private int x, y;
@@ -13,11 +14,22 @@ public class Tank {
 	public static int WIDTH = ResourceMgr.tankD.getWidth();
 	public static int HEIGHT = ResourceMgr.tankD.getHeight();
 	
-	private boolean moving = false;
+	private boolean moving = true;
 	
 	private TankFrame tf = null;
 	private boolean living = true;
+	private Random random = new Random();
+	private Group group = Group.BAD;
 	
+	
+	public Group getGroup() {
+		return group;
+	}
+
+	public void setGroup(Group group) {
+		this.group = group;
+	}
+
 	public int getX() {
 		return x;
 	}
@@ -51,11 +63,12 @@ public class Tank {
 	}
 	
 	 
-	public Tank(int x, int y, Dir dir, TankFrame tf) {
+	public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
+		this.group = group;
 		this.tf = tf;
 	}
 	
@@ -100,12 +113,15 @@ public class Tank {
 			y += SPEED;
 			break;
 		}
+		
+		if (random.nextInt(10) > 8) this.fire();
 	}
 
 	public void fire() {
 		int bX = this.x + WIDTH / 2 - Bullet.WIDTH / 2;
 		int bY = this.y + HEIGHT / 2 - Bullet.HEIGHT / 2;
-		tf .bullets.add(new Bullet(bX, bY, this.dir, this.tf));
+		
+		tf .bullets.add(new Bullet(bX, bY, this.dir, this.group, this.tf));
 	}
 
 	public void die() {
